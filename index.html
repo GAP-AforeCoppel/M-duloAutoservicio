@@ -1,6 +1,6 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
- <head>
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Módulo de Autoservicio - Afore Coppel</title>
@@ -188,6 +188,33 @@
       font-weight: 600;
     }
 
+    .fullscreen-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #d4a574;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .fullscreen-btn:hover {
+      background: #c19555;
+      transform: scale(1.1);
+    }
+
+    .presentation-container {
+      position: relative;
+    }
+
     .slide-illustration {
       margin: 20px 0;
       display: flex;
@@ -316,369 +343,463 @@
       align-items: center;
     }
   </style>
-  <style>@view-transition { navigation: auto; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
- </head>
- <body>
-  <div class="presentation-container"><!-- Slide 1: Portada -->
-   <div class="slide intro-slide active">
-    <div>
-     <div class="slide-illustration svg-animation">
-      <svg width="200" height="200" viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><!-- Pantalla de módulo --> <rect x="30" y="30" width="140" height="140" rx="10" fill="none" stroke="#d4a574" stroke-width="4" /> <rect x="40" y="40" width="120" height="100" rx="6" fill="#e8f5e9" stroke="#1a472a" stroke-width="2" /> <!-- Botones en la pantalla --> <rect x="50" y="55" width="30" height="20" rx="3" fill="#d4a574" opacity="0.8" class="pulse-animation" /> <rect x="95" y="55" width="30" height="20" rx="3" fill="#d4a574" opacity="0.8" /> <rect x="140" y="55" width="10" height="20" rx="3" fill="#d4a574" opacity="0.6" /> <!-- Líneas de contenido --> <line x1="50" y1="85" x2="130" y2="85" stroke="#1a472a" stroke-width="2" opacity="0.5" /> <line x1="50" y1="95" x2="130" y2="95" stroke="#1a472a" stroke-width="2" opacity="0.5" /> <line x1="50" y1="105" x2="100" y2="105" stroke="#1a472a" stroke-width="2" opacity="0.5" /> <line x1="50" y1="115" x2="110" y2="115" stroke="#1a472a" stroke-width="2" opacity="0.5" /> <line x1="50" y1="125" x2="95" y2="125" stroke="#1a472a" stroke-width="2" opacity="0.5" /> <!-- Indicador de carga --> <circle cx="100" cy="160" r="8" fill="none" stroke="#d4a574" stroke-width="2" class="rotate-animation" />
-      </svg>
-     </div>
-     <div class="slide-title">
-      Módulo de Autoservicio
-     </div>
-     <div class="slide-subtitle">
-      Afore Coppel
-     </div>
-     <div class="intro-badge">
-      Capacitación para Asesores Digitales
-     </div>
-     <div class="intro-logo">
-      Innovación en Canales de Atención
-     </div>
-    </div>
-   </div><!-- Slide 2: ¿Qué es el Módulo? -->
-   <div class="slide">
-    <div class="slide-title">
-     ¿Qué es el Módulo de Autoservicio?
-    </div>
-    <div class="two-column">
-     <div class="slide-content">
-      <p style="font-size: 19px; margin: 20px 0; color: #2c3e50; line-height: 1.8;">Es un canal de atención práctico, fácil e intuitivo dentro de la sucursal que permite al cliente titular realizar sus propios trámites y solicitudes directamente en un equipo de cómputo, <strong>sin necesidad de que un Asesor Previsional realice la operación por él.</strong></p>
-      <div class="highlight-box" style="margin-top: 30px;"><strong>💡 Concepto Clave:</strong> El cliente es el protagonista de sus propios trámites, con tu apoyo como guía.
+</head>
+<body>
+  <div class="presentation-container">
+    <button class="fullscreen-btn" id="fullscreenBtn" onclick="toggleFullscreen()" title="Pantalla completa">⛶</button>
+    <!-- Slide 1: Portada -->
+    <div class="slide intro-slide active">
+      <div>
+        <div class="slide-illustration svg-animation">
+          <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Pantalla de módulo -->
+            <rect x="30" y="30" width="140" height="140" rx="10" fill="none" stroke="#d4a574" stroke-width="4"/>
+            <rect x="40" y="40" width="120" height="100" rx="6" fill="#e8f5e9" stroke="#1a472a" stroke-width="2"/>
+            
+            <!-- Botones en la pantalla -->
+            <rect x="50" y="55" width="30" height="20" rx="3" fill="#d4a574" opacity="0.8" class="pulse-animation"/>
+            <rect x="95" y="55" width="30" height="20" rx="3" fill="#d4a574" opacity="0.8"/>
+            <rect x="140" y="55" width="10" height="20" rx="3" fill="#d4a574" opacity="0.6"/>
+            
+            <!-- Líneas de contenido -->
+            <line x1="50" y1="85" x2="130" y2="85" stroke="#1a472a" stroke-width="2" opacity="0.5"/>
+            <line x1="50" y1="95" x2="130" y2="95" stroke="#1a472a" stroke-width="2" opacity="0.5"/>
+            <line x1="50" y1="105" x2="100" y2="105" stroke="#1a472a" stroke-width="2" opacity="0.5"/>
+            <line x1="50" y1="115" x2="110" y2="115" stroke="#1a472a" stroke-width="2" opacity="0.5"/>
+            <line x1="50" y1="125" x2="95" y2="125" stroke="#1a472a" stroke-width="2" opacity="0.5"/>
+            
+            <!-- Indicador de carga -->
+            <circle cx="100" cy="160" r="8" fill="none" stroke="#d4a574" stroke-width="2" class="rotate-animation"/>
+          </svg>
+        </div>
+        <div class="slide-title">Módulo de Autoservicio</div>
+        <div class="slide-subtitle">Afore Coppel</div>
+        <div class="intro-badge">Capacitación para Asesores Digitales</div>
+        <div class="intro-logo">Innovación en Canales de Atención</div>
       </div>
-     </div>
-     <div class="slide-illustration svg-animation">
-      <svg width="280" height="280" viewbox="0 0 280 280" xmlns="http://www.w3.org/2000/svg"><!-- Dispositivo central grande --> <rect x="50" y="40" width="180" height="140" rx="12" fill="none" stroke="#d4a574" stroke-width="4" class="float-animation" /> <rect x="65" y="55" width="150" height="110" rx="8" fill="#e8f5e9" stroke="#1a472a" stroke-width="2" /> <!-- Pantalla con contenido --> <rect x="75" y="65" width="130" height="50" fill="#f0f8ff" rx="4" /> <line x1="85" y1="75" x2="195" y2="75" stroke="#1a472a" stroke-width="1.5" opacity="0.4" /> <line x1="85" y1="85" x2="195" y2="85" stroke="#1a472a" stroke-width="1.5" opacity="0.4" /> <line x1="85" y1="95" x2="160" y2="95" stroke="#1a472a" stroke-width="1.5" opacity="0.4" /> <line x1="85" y1="105" x2="175" y2="105" stroke="#1a472a" stroke-width="1.5" opacity="0.4" /> <!-- Botones --> <rect x="85" y="125" width="50" height="25" rx="4" fill="#d4a574" opacity="0.8" class="pulse-animation" /> <text x="110" y="143" text-anchor="middle" font-size="10" font-weight="600" fill="white">
-        Aceptar
-       </text> <!-- Usuario interactuando --> <circle cx="140" cy="220" r="16" fill="#d4a574" /> <rect x="125" y="238" width="30" height="35" rx="3" fill="#e8f5e9" stroke="#d4a574" stroke-width="1.5" /> <rect x="120" y="273" width="8" height="7" fill="#d4a574" /> <rect x="152" y="273" width="8" height="7" fill="#d4a574" /> <!-- Punto de interacción --> <path d="M 140 185 L 140 210" stroke="#d4a574" stroke-width="2" stroke-dasharray="5,5" opacity="0.6" /> <circle cx="140" cy="195" r="4" fill="#d4a574" class="pulse-animation" />
-      </svg>
-     </div>
     </div>
-   </div><!-- Slide 3: Objetivo y Beneficios -->
-   <div class="slide">
-    <div class="slide-title">
-     Objetivo y Beneficios
-    </div>
-    <div class="two-column">
-     <div class="slide-content">
-      <div class="highlight-box"><strong>🎯 Objetivo Principal:</strong>
-       <p style="margin: 10px 0 0 0; color: #2c3e50;">Ahorrar tiempo tanto al usuario como al personal de tienda. El cliente resuelve sus dudas y trámites de forma autónoma, aumentando la productividad.</p>
+
+    <!-- Slide 2: ¿Qué es el Módulo? -->
+    <div class="slide">
+      <div class="slide-title">¿Qué es el Módulo de Autoservicio?</div>
+      <div class="two-column">
+        <div class="slide-content">
+          <p style="font-size: 19px; margin: 20px 0; color: #2c3e50; line-height: 1.8;">Es un canal de atención práctico, fácil e intuitivo dentro de la sucursal que permite al cliente titular realizar sus propios trámites y solicitudes directamente en un equipo de cómputo, <strong>sin necesidad de que un Asesor Previsional realice la operación por él.</strong></p>
+          
+          <div class="highlight-box" style="margin-top: 30px;">
+            <strong>💡 Concepto Clave:</strong> El cliente es el protagonista de sus propios trámites, con tu apoyo como guía.
+          </div>
+        </div>
+        <div class="slide-illustration svg-animation">
+          <svg width="280" height="280" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+            <!-- Dispositivo central grande -->
+            <rect x="50" y="40" width="180" height="140" rx="12" fill="none" stroke="#d4a574" stroke-width="4" class="float-animation"/>
+            <rect x="65" y="55" width="150" height="110" rx="8" fill="#e8f5e9" stroke="#1a472a" stroke-width="2"/>
+            
+            <!-- Pantalla con contenido -->
+            <rect x="75" y="65" width="130" height="50" fill="#f0f8ff" rx="4"/>
+            <line x1="85" y1="75" x2="195" y2="75" stroke="#1a472a" stroke-width="1.5" opacity="0.4"/>
+            <line x1="85" y1="85" x2="195" y2="85" stroke="#1a472a" stroke-width="1.5" opacity="0.4"/>
+            <line x1="85" y1="95" x2="160" y2="95" stroke="#1a472a" stroke-width="1.5" opacity="0.4"/>
+            <line x1="85" y1="105" x2="175" y2="105" stroke="#1a472a" stroke-width="1.5" opacity="0.4"/>
+            
+            <!-- Botones -->
+            <rect x="85" y="125" width="50" height="25" rx="4" fill="#d4a574" opacity="0.8" class="pulse-animation"/>
+            <text x="110" y="143" text-anchor="middle" font-size="10" font-weight="600" fill="white">Aceptar</text>
+            
+            <!-- Usuario interactuando -->
+            <circle cx="140" cy="220" r="16" fill="#d4a574"/>
+            <rect x="125" y="238" width="30" height="35" rx="3" fill="#e8f5e9" stroke="#d4a574" stroke-width="1.5"/>
+            <rect x="120" y="273" width="8" height="7" fill="#d4a574"/>
+            <rect x="152" y="273" width="8" height="7" fill="#d4a574"/>
+            
+            <!-- Punto de interacción -->
+            <path d="M 140 185 L 140 210" stroke="#d4a574" stroke-width="2" stroke-dasharray="5,5" opacity="0.6"/>
+            <circle cx="140" cy="195" r="4" fill="#d4a574" class="pulse-animation"/>
+          </svg>
+        </div>
       </div>
-      <p style="font-size: 18px; margin: 25px 0 15px 0; color: #1a472a; font-weight: 600;">Beneficios Clave:</p>
-      <ul class="bullet-list">
-       <li><strong>Autonomía:</strong> El cliente no depende de la disponibilidad de un ejecutivo.</li>
-       <li><strong>Acceso Digital:</strong> Al integrar expediente, se habilitan automáticamente App AforeMóvil y AforeWeb.</li>
-       <li><strong>Rapidez:</strong> Procesos inmediatos con envío al correo.</li>
-       <li><strong>Eficiencia:</strong> Desahoga sucursales con mayor saturación.</li>
-      </ul>
-     </div>
-     <div class="slide-illustration svg-animation">
-      <svg width="260" height="320" viewbox="0 0 260 320" xmlns="http://www.w3.org/2000/svg"><!-- Centro: Reloj/Tiempo --> <circle cx="130" cy="60" r="35" fill="none" stroke="#d4a574" stroke-width="3" class="rotate-animation" /> <circle cx="130" cy="60" r="30" fill="none" stroke="#d4a574" stroke-width="1" opacity="0.5" /> <line x1="130" y1="35" x2="130" y2="50" stroke="#d4a574" stroke-width="2" /> <line x1="145" y1="60" x2="155" y2="60" stroke="#d4a574" stroke-width="2" /> <text x="130" y="130" text-anchor="middle" font-size="12" font-weight="600" fill="#d4a574">
-        Ahorrar Tiempo
-       </text> <!-- Beneficio 1: Usuario --> <g class="float-animation" style="animation-delay: 0.2s">
-        <circle cx="50" cy="180" r="22" fill="#e8f5e9" stroke="#d4a574" stroke-width="2" />
-        <text x="50" y="187" text-anchor="middle" font-size="18" fill="#d4a574">
-         👤
-        </text>
-        <text x="50" y="220" text-anchor="middle" font-size="11" font-weight="600" fill="#1a472a">
-         Autonomía
-        </text>
-       </g> <!-- Beneficio 2: Conectividad --> <g class="float-animation" style="animation-delay: 0.4s">
-        <circle cx="130" cy="200" r="22" fill="#fff3e0" stroke="#d4a574" stroke-width="2" />
-        <text x="130" y="207" text-anchor="middle" font-size="18" fill="#d4a574">
-         🔗
-        </text>
-        <text x="130" y="233" text-anchor="middle" font-size="11" font-weight="600" fill="#1a472a">
-         Digital
-        </text>
-       </g> <!-- Beneficio 3: Velocidad --> <g class="float-animation" style="animation-delay: 0.6s">
-        <circle cx="210" cy="180" r="22" fill="#e8f5e9" stroke="#d4a574" stroke-width="2" />
-        <text x="210" y="187" text-anchor="middle" font-size="18" fill="#d4a574">
-         ⚡
-        </text>
-        <text x="210" y="220" text-anchor="middle" font-size="11" font-weight="600" fill="#1a572a">
-         Rapidez
-        </text>
-       </g> <!-- Líneas conectoras --> <line x1="85" y1="100" x2="70" y2="155" stroke="#d4a574" stroke-width="1.5" opacity="0.4" stroke-dasharray="3,3" /> <line x1="130" y1="95" x2="130" y2="175" stroke="#d4a574" stroke-width="1.5" opacity="0.4" stroke-dasharray="3,3" /> <line x1="175" y1="100" x2="190" y2="155" stroke="#d4a574" stroke-width="1.5" opacity="0.4" stroke-dasharray="3,3" /> <!-- Base: Eficiencia --> <rect x="45" y="270" width="170" height="40" rx="6" fill="#e8f5e9" stroke="#d4a574" stroke-width="2" /> <text x="130" y="285" text-anchor="middle" font-size="12" font-weight="600" fill="#1a472a">
-        ✓ Eficiencia Operativa
-       </text> <text x="130" y="303" text-anchor="middle" font-size="10" fill="#666">
-        Sucursales menos saturadas
-       </text>
-      </svg>
-     </div>
     </div>
-   </div><!-- Slide 4: Proceso de Autenticación -->
-   <div class="slide">
-    <div class="slide-title">
-     Proceso de Autenticación
-    </div>
-    <div class="slide-content">
-     <p style="font-size: 18px; margin: 15px 0 25px 0; color: #2c3e50;">Para garantizar la seguridad de la cuenta, el titular debe pasar por filtros de identidad antes de iniciar cualquier trámite:</p>
-     <ol class="numbered-list">
-      <li><strong>Ingreso de Datos:</strong> El cliente escribe su CURP o NSS.</li>
-      <li><strong>Huellas Dactilares:</strong> Se capturan en el lector los dedos índices y pulgares.</li>
-      <li><strong>Validación de INE:</strong> El cliente escanea su credencial y digita el Código CIC.</li>
-      <li><strong>Fotografía (Selfie):</strong> El sistema toma una foto del rostro para validar la identidad.</li>
-      <li><strong>Validación Telefónica:</strong> Ingreso de un código recibido por SMS o llamada.</li>
-     </ol>
-    </div>
-    <div class="slide-illustration svg-animation" style="margin-top: 40px;">
-     <svg width="600" height="120" viewbox="0 0 600 120" xmlns="http://www.w3.org/2000/svg"><!-- Paso 1 --> <g class="float-animation" style="animation-delay: 0s">
-       <circle cx="30" cy="60" r="20" fill="#d4a574" opacity="0.8" />
-       <text x="30" y="68" text-anchor="middle" font-size="16" font-weight="700" fill="white">
-        1
-       </text>
-       <text x="30" y="105" text-anchor="middle" font-size="11" font-weight="600" fill="#1a472a">
-        CURP/NSS
-       </text>
-      </g> <!-- Flecha --> <path d="M 55 60 L 90 60" stroke="#d4a574" stroke-width="2.5" fill="none" marker-end="url(#arrowhead)" /> <!-- Paso 2 --> <g class="float-animation" style="animation-delay: 0.2s">
-       <circle cx="120" cy="60" r="20" fill="#d4a574" opacity="0.8" />
-       <text x="120" y="68" text-anchor="middle" font-size="16" font-weight="700" fill="white">
-        2
-       </text>
-       <text x="120" y="105" text-anchor="middle" font-size="11" font-weight="600" fill="#1a472a">
-        Huellas
-       </text>
-      </g> <!-- Flecha --> <path d="M 145 60 L 180 60" stroke="#d4a574" stroke-width="2.5" fill="none" marker-end="url(#arrowhead)" /> <!-- Paso 3 --> <g class="float-animation" style="animation-delay: 0.4s">
-       <circle cx="210" cy="60" r="20" fill="#d4a574" opacity="0.8" />
-       <text x="210" y="68" text-anchor="middle" font-size="16" font-weight="700" fill="white">
-        3
-       </text>
-       <text x="210" y="105" text-anchor="middle" font-size="11" font-weight="600" fill="#1a472a">
-        INE/CIC
-       </text>
-      </g> <!-- Flecha --> <path d="M 235 60 L 270 60" stroke="#d4a574" stroke-width="2.5" fill="none" marker-end="url(#arrowhead)" /> <!-- Paso 4 --> <g class="float-animation" style="animation-delay: 0.6s">
-       <circle cx="300" cy="60" r="20" fill="#d4a574" opacity="0.8" />
-       <text x="300" y="68" text-anchor="middle" font-size="16" font-weight="700" fill="white">
-        4
-       </text>
-       <text x="300" y="105" text-anchor="middle" font-size="11" font-weight="600" fill="#1a472a">
-        Selfie
-       </text>
-      </g> <!-- Flecha --> <path d="M 325 60 L 360 60" stroke="#d4a574" stroke-width="2.5" fill="none" marker-end="url(#arrowhead)" /> <!-- Paso 5 --> <g class="float-animation" style="animation-delay: 0.8s">
-       <circle cx="390" cy="60" r="20" fill="#d4a574" opacity="0.8" />
-       <text x="390" y="68" text-anchor="middle" font-size="16" font-weight="700" fill="white">
-        5
-       </text>
-       <text x="390" y="105" text-anchor="middle" font-size="11" font-weight="600" fill="#1a472a">
-        SMS/Llamada
-       </text>
-      </g> <!-- Escudo final --> <g style="opacity: 0.6; margin-left: 40px;">
-       <path d="M 470 35 L 510 55 L 510 90 C 510 110 470 125 470 125 C 470 125 430 110 430 90 L 430 55 Z" fill="none" stroke="#d4a574" stroke-width="2.5" />
-       <text x="470" y="85" text-anchor="middle" font-size="28" fill="#d4a574">
-        ✓
-       </text>
-      </g> <!-- Marcador de flechas --> <defs>
-       <marker id="arrowhead" markerwidth="10" markerheight="10" refx="9" refy="3" orient="auto">
-        <polygon points="0 0, 10 3, 0 6" fill="#d4a574" />
-       </marker>
-      </defs>
-     </svg>
-    </div>
-   </div><!-- Slide 5: Servicios Disponibles -->
-   <div class="slide">
-    <div class="slide-title">
-     ¿Qué Servicios se Pueden Realizar?
-    </div>
-    <div class="slide-content">
-     <p style="font-size: 18px; margin: 15px 0 25px 0; color: #2c3e50;">El módulo permite realizar las siguientes operaciones principales:</p>
-     <ul class="bullet-list">
-      <li><strong>Alta de Expediente de Identificación:</strong> Para clientes nuevos o sin biométricos registrados.</li>
-      <li><strong>Solicitud de Retiros Parciales por Desempleo:</strong> Para clientes que cumplen con los requisitos legales.</li>
-      <li><strong>Consulta de Saldo y Movimientos:</strong> Visualización y envío de información al correo.</li>
-      <li><strong>Reimpresión de Estado de Cuenta:</strong> Solicitud de los últimos dos periodos cuatrimestrales.</li>
-     </ul>
-    </div>
-    <div class="slide-illustration svg-animation" style="margin-top: 40px;">
-     <svg width="600" height="140" viewbox="0 0 600 140" xmlns="http://www.w3.org/2000/svg"><!-- Servicio 1: Expediente --> <g class="float-animation" style="animation-delay: 0s">
-       <rect x="25" y="20" width="110" height="90" rx="6" fill="#e8f5e9" stroke="#d4a574" stroke-width="2.5" />
-       <rect x="40" y="30" width="80" height="50" fill="#f0f8ff" rx="3" />
-       <line x1="50" y1="40" x2="110" y2="40" stroke="#1a472a" stroke-width="1.5" opacity="0.5" />
-       <line x1="50" y1="50" x2="110" y2="50" stroke="#1a472a" stroke-width="1.5" opacity="0.5" />
-       <line x1="50" y1="60" x2="85" y2="60" stroke="#1a472a" stroke-width="1.5" opacity="0.5" />
-       <text x="80" y="95" text-anchor="middle" font-size="12" font-weight="600" fill="#d4a574">
-        Expediente
-       </text>
-      </g> <!-- Servicio 2: Retiros --> <g class="float-animation" style="animation-delay: 0.2s">
-       <rect x="155" y="20" width="110" height="90" rx="6" fill="#fff3e0" stroke="#d4a574" stroke-width="2.5" />
-       <circle cx="180" cy="40" r="8" fill="#d4a574" opacity="0.7" />
-       <rect x="175" y="50" width="40" height="8" rx="2" fill="#d4a574" opacity="0.8" />
-       <rect x="175" y="62" width="30" height="8" rx="2" fill="#d4a574" opacity="0.6" />
-       <rect x="175" y="74" width="20" height="8" rx="2" fill="#d4a574" opacity="0.4" />
-       <text x="210" y="95" text-anchor="middle" font-size="12" font-weight="600" fill="#d4a574">
-        Retiros
-       </text>
-      </g> <!-- Servicio 3: Consultas --> <g class="float-animation" style="animation-delay: 0.4s">
-       <rect x="285" y="20" width="110" height="90" rx="6" fill="#e8f5e9" stroke="#d4a574" stroke-width="2.5" />
-       <circle cx="325" cy="45" r="8" fill="none" stroke="#d4a574" stroke-width="2" />
-       <text x="325" y="50" text-anchor="middle" font-size="16" font-weight="700" fill="#d4a574">
-        $
-       </text>
-       <polyline points="310,65 320,55 330,65 340,50" fill="none" stroke="#d4a574" stroke-width="1.5" />
-       <text x="340" y="95" text-anchor="middle" font-size="12" font-weight="600" fill="#d4a574">
-        Consultas
-       </text>
-      </g> <!-- Servicio 4: Estado de Cuenta --> <g class="float-animation" style="animation-delay: 0.6s">
-       <rect x="415" y="20" width="110" height="90" rx="6" fill="#fff3e0" stroke="#d4a574" stroke-width="2.5" />
-       <line x1="435" y1="30" x2="495" y2="30" stroke="#1a472a" stroke-width="2" opacity="0.6" />
-       <line x1="435" y1="45" x2="495" y2="45" stroke="#1a472a" stroke-width="1.5" opacity="0.5" />
-       <line x1="435" y1="58" x2="495" y2="58" stroke="#1a472a" stroke-width="1.5" opacity="0.5" />
-       <line x1="435" y1="71" x2="480" y2="71" stroke="#1a472a" stroke-width="1.5" opacity="0.5" />
-       <text x="470" y="95" text-anchor="middle" font-size="12" font-weight="600" fill="#d4a574">
-        Estado Cuenta
-       </text>
-      </g>
-     </svg>
-    </div>
-   </div><!-- Slide 6: Actualización de Expediente -->
-   <div class="slide">
-    <div class="slide-title">
-     Actualización de Expediente y Datos
-    </div>
-    <div class="two-column">
-     <div class="slide-content">
-      <p style="font-size: 17px; margin: 15px 0 20px 0; color: #2c3e50; font-weight: 600;">🔄 Actualización de Expediente</p>
-      <p style="font-size: 16px; margin: 0 0 20px 0; color: #555;">El sistema detecta automáticamente si los expedientes han vencido y permite iniciar la actualización inmediatamente.</p>
-      <p style="font-size: 17px; margin: 20px 0 15px 0; color: #2c3e50; font-weight: 600;">✏️ Modificación de Datos</p>
-      <div class="grid-2">
-       <div class="grid-item">
-        <div class="grid-item-title">
-         📧 Contacto
+
+    <!-- Slide 3: Objetivo y Beneficios -->
+    <div class="slide">
+      <div class="slide-title">Objetivo y Beneficios</div>
+      <div class="two-column">
+        <div class="slide-content">
+          <div class="highlight-box">
+            <strong>🎯 Objetivo Principal:</strong>
+            <p style="margin: 10px 0 0 0; color: #2c3e50;">Ahorrar tiempo tanto al usuario como al personal de tienda. El cliente resuelve sus dudas y trámites de forma autónoma, aumentando la productividad.</p>
+          </div>
+
+          <p style="font-size: 18px; margin: 25px 0 15px 0; color: #1a472a; font-weight: 600;">Beneficios Clave:</p>
+          
+          <ul class="bullet-list">
+            <li><strong>Autonomía:</strong> El cliente no depende de la disponibilidad de un ejecutivo.</li>
+            <li><strong>Acceso Digital:</strong> Al integrar expediente, se habilitan automáticamente App AforeMóvil y AforeWeb.</li>
+            <li><strong>Rapidez:</strong> Procesos inmediatos con envío al correo.</li>
+            <li><strong>Eficiencia:</strong> Desahoga sucursales con mayor saturación.</li>
+          </ul>
         </div>
-        <div class="grid-item-text">
-         Correo y teléfono
+        <div class="slide-illustration svg-animation">
+          <svg width="260" height="320" viewBox="0 0 260 320" xmlns="http://www.w3.org/2000/svg">
+            <!-- Centro: Reloj/Tiempo -->
+            <circle cx="130" cy="60" r="35" fill="none" stroke="#d4a574" stroke-width="3" class="rotate-animation"/>
+            <circle cx="130" cy="60" r="30" fill="none" stroke="#d4a574" stroke-width="1" opacity="0.5"/>
+            <line x1="130" y1="35" x2="130" y2="50" stroke="#d4a574" stroke-width="2"/>
+            <line x1="145" y1="60" x2="155" y2="60" stroke="#d4a574" stroke-width="2"/>
+            <text x="130" y="130" text-anchor="middle" font-size="12" font-weight="600" fill="#d4a574">Ahorrar Tiempo</text>
+            
+            <!-- Beneficio 1: Usuario -->
+            <g class="float-animation" style="animation-delay: 0.2s">
+              <circle cx="50" cy="180" r="22" fill="#e8f5e9" stroke="#d4a574" stroke-width="2"/>
+              <text x="50" y="187" text-anchor="middle" font-size="18" fill="#d4a574">👤</text>
+              <text x="50" y="220" text-anchor="middle" font-size="11" font-weight="600" fill="#1a472a">Autonomía</text>
+            </g>
+            
+            <!-- Beneficio 2: Conectividad -->
+            <g class="float-animation" style="animation-delay: 0.4s">
+              <circle cx="130" cy="200" r="22" fill="#fff3e0" stroke="#d4a574" stroke-width="2"/>
+              <text x="130" y="207" text-anchor="middle" font-size="18" fill="#d4a574">🔗</text>
+              <text x="130" y="233" text-anchor="middle" font-size="11" font-weight="600" fill="#1a472a">Digital</text>
+            </g>
+            
+            <!-- Beneficio 3: Velocidad -->
+            <g class="float-animation" style="animation-delay: 0.6s">
+              <circle cx="210" cy="180" r="22" fill="#e8f5e9" stroke="#d4a574" stroke-width="2"/>
+              <text x="210" y="187" text-anchor="middle" font-size="18" fill="#d4a574">⚡</text>
+              <text x="210" y="220" text-anchor="middle" font-size="11" font-weight="600" fill="#1a572a">Rapidez</text>
+            </g>
+            
+            <!-- Líneas conectoras -->
+            <line x1="85" y1="100" x2="70" y2="155" stroke="#d4a574" stroke-width="1.5" opacity="0.4" stroke-dasharray="3,3"/>
+            <line x1="130" y1="95" x2="130" y2="175" stroke="#d4a574" stroke-width="1.5" opacity="0.4" stroke-dasharray="3,3"/>
+            <line x1="175" y1="100" x2="190" y2="155" stroke="#d4a574" stroke-width="1.5" opacity="0.4" stroke-dasharray="3,3"/>
+            
+            <!-- Base: Eficiencia -->
+            <rect x="45" y="270" width="170" height="40" rx="6" fill="#e8f5e9" stroke="#d4a574" stroke-width="2"/>
+            <text x="130" y="285" text-anchor="middle" font-size="12" font-weight="600" fill="#1a472a">✓ Eficiencia Operativa</text>
+            <text x="130" y="303" text-anchor="middle" font-size="10" fill="#666">Sucursales menos saturadas</text>
+          </svg>
         </div>
-       </div>
-       <div class="grid-item">
-        <div class="grid-item-title">
-         🏛️ Fiscales
-        </div>
-        <div class="grid-item-text">
-         RFC
-        </div>
-       </div>
-       <div class="grid-item">
-        <div class="grid-item-title">
-         👥 Beneficiarios
-        </div>
-        <div class="grid-item-text">
-         Registrar/eliminar
-        </div>
-       </div>
-       <div class="grid-item">
-        <div class="grid-item-title">
-         📍 Domicilio
-        </div>
-        <div class="grid-item-text">
-         Dirección
-        </div>
-       </div>
       </div>
-      <div class="highlight-box" style="margin-top: 20px; font-size: 15px;"><strong>⚙️ Validación:</strong> Cambios requieren confirmación vía SMS o email dentro de horas.
-      </div>
-     </div>
-     <div class="slide-illustration svg-animation">
-      <svg width="240" height="320" viewbox="0 0 240 320" xmlns="http://www.w3.org/2000/svg"><!-- Alerta de vencimiento --> <g class="pulse-animation">
-        <rect x="30" y="20" width="180" height="50" rx="6" fill="#ffe8e8" stroke="#d4a574" stroke-width="2.5" />
-        <text x="120" y="42" text-anchor="middle" font-size="13" font-weight="700" fill="#d4a574">
-         ⚠️ Expediente Vencido
-        </text>
-        <text x="120" y="60" text-anchor="middle" font-size="11" fill="#555">
-         Actualizar ahora
-        </text>
-       </g> <!-- Centro: Base de datos --> <circle cx="120" cy="120" r="28" fill="#e8f5e9" stroke="#d4a574" stroke-width="2.5" class="float-animation" /> <text x="120" y="128" text-anchor="middle" font-size="22" fill="#d4a574">
-        ≡
-       </text> <!-- Campos modificables extendiendo --> <g class="float-animation" style="animation-delay: 0.15s">
-        <line x1="120" y1="148" x2="70" y2="190" stroke="#d4a574" stroke-width="1.5" opacity="0.4" />
-        <rect x="35" y="185" width="70" height="30" rx="4" fill="#fff3e0" stroke="#d4a574" stroke-width="1.5" />
-        <text x="70" y="205" text-anchor="middle" font-size="11" font-weight="600" fill="#d4a574">
-         Contacto
-        </text>
-       </g> <g class="float-animation" style="animation-delay: 0.3s">
-        <line x1="120" y1="148" x2="170" y2="190" stroke="#d4a574" stroke-width="1.5" opacity="0.4" />
-        <rect x="135" y="185" width="70" height="30" rx="4" fill="#e8f5e9" stroke="#d4a574" stroke-width="1.5" />
-        <text x="170" y="205" text-anchor="middle" font-size="11" font-weight="600" fill="#d4a574">
-         Domicilio
-        </text>
-       </g> <!-- Validación --> <g class="float-animation" style="animation-delay: 0.45s">
-        <rect x="40" y="250" width="160" height="50" rx="6" fill="#e8f5e9" stroke="#d4a574" stroke-width="2.5" />
-        <text x="120" y="270" text-anchor="middle" font-size="12" font-weight="600" fill="#d4a574">
-         Validación SMS/Email
-        </text>
-        <text x="120" y="288" text-anchor="middle" font-size="10" fill="#666">
-         Confirmar en pocas horas
-        </text>
-       </g>
-      </svg>
-     </div>
     </div>
-   </div><!-- Slide 7: Función del Asesor Digital -->
-   <div class="slide">
-    <div class="slide-title">
-     Función del Asesor Digital
+
+    <!-- Slide 4: Proceso de Autenticación -->
+    <div class="slide">
+      <div class="slide-title">Proceso de Autenticación</div>
+      <div class="slide-content">
+        <p style="font-size: 18px; margin: 15px 0 25px 0; color: #2c3e50;">Para garantizar la seguridad de la cuenta, el titular debe pasar por filtros de identidad antes de iniciar cualquier trámite:</p>
+        
+        <ol class="numbered-list">
+          <li><strong>Ingreso de Datos:</strong> El cliente escribe su CURP o NSS.</li>
+          <li><strong>Huellas Dactilares:</strong> Se capturan en el lector los dedos índices y pulgares.</li>
+          <li><strong>Validación de INE:</strong> El cliente escanea su credencial y digita el Código CIC.</li>
+          <li><strong>Fotografía (Selfie):</strong> El sistema toma una foto del rostro para validar la identidad.</li>
+          <li><strong>Validación Telefónica:</strong> Ingreso de un código recibido por SMS o llamada.</li>
+        </ol>
+      </div>
+      <div class="slide-illustration svg-animation" style="margin-top: 40px;">
+        <svg width="600" height="120" viewBox="0 0 600 120" xmlns="http://www.w3.org/2000/svg">
+          <!-- Paso 1 -->
+          <g class="float-animation" style="animation-delay: 0s">
+            <circle cx="30" cy="60" r="20" fill="#d4a574" opacity="0.8"/>
+            <text x="30" y="68" text-anchor="middle" font-size="16" font-weight="700" fill="white">1</text>
+            <text x="30" y="105" text-anchor="middle" font-size="11" font-weight="600" fill="#1a472a">CURP/NSS</text>
+          </g>
+          
+          <!-- Flecha -->
+          <path d="M 55 60 L 90 60" stroke="#d4a574" stroke-width="2.5" fill="none" marker-end="url(#arrowhead)"/>
+          
+          <!-- Paso 2 -->
+          <g class="float-animation" style="animation-delay: 0.2s">
+            <circle cx="120" cy="60" r="20" fill="#d4a574" opacity="0.8"/>
+            <text x="120" y="68" text-anchor="middle" font-size="16" font-weight="700" fill="white">2</text>
+            <text x="120" y="105" text-anchor="middle" font-size="11" font-weight="600" fill="#1a472a">Huellas</text>
+          </g>
+          
+          <!-- Flecha -->
+          <path d="M 145 60 L 180 60" stroke="#d4a574" stroke-width="2.5" fill="none" marker-end="url(#arrowhead)"/>
+          
+          <!-- Paso 3 -->
+          <g class="float-animation" style="animation-delay: 0.4s">
+            <circle cx="210" cy="60" r="20" fill="#d4a574" opacity="0.8"/>
+            <text x="210" y="68" text-anchor="middle" font-size="16" font-weight="700" fill="white">3</text>
+            <text x="210" y="105" text-anchor="middle" font-size="11" font-weight="600" fill="#1a472a">INE/CIC</text>
+          </g>
+          
+          <!-- Flecha -->
+          <path d="M 235 60 L 270 60" stroke="#d4a574" stroke-width="2.5" fill="none" marker-end="url(#arrowhead)"/>
+          
+          <!-- Paso 4 -->
+          <g class="float-animation" style="animation-delay: 0.6s">
+            <circle cx="300" cy="60" r="20" fill="#d4a574" opacity="0.8"/>
+            <text x="300" y="68" text-anchor="middle" font-size="16" font-weight="700" fill="white">4</text>
+            <text x="300" y="105" text-anchor="middle" font-size="11" font-weight="600" fill="#1a472a">Selfie</text>
+          </g>
+          
+          <!-- Flecha -->
+          <path d="M 325 60 L 360 60" stroke="#d4a574" stroke-width="2.5" fill="none" marker-end="url(#arrowhead)"/>
+          
+          <!-- Paso 5 -->
+          <g class="float-animation" style="animation-delay: 0.8s">
+            <circle cx="390" cy="60" r="20" fill="#d4a574" opacity="0.8"/>
+            <text x="390" y="68" text-anchor="middle" font-size="16" font-weight="700" fill="white">5</text>
+            <text x="390" y="105" text-anchor="middle" font-size="11" font-weight="600" fill="#1a472a">SMS/Llamada</text>
+          </g>
+          
+          <!-- Escudo final -->
+          <g style="opacity: 0.6; margin-left: 40px;">
+            <path d="M 470 35 L 510 55 L 510 90 C 510 110 470 125 470 125 C 470 125 430 110 430 90 L 430 55 Z" fill="none" stroke="#d4a574" stroke-width="2.5"/>
+            <text x="470" y="85" text-anchor="middle" font-size="28" fill="#d4a574">✓</text>
+          </g>
+          
+          <!-- Marcador de flechas -->
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#d4a574"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
     </div>
-    <div class="two-column">
-     <div class="slide-content">
-      <div class="highlight-box" style="background: #e8f5e9; border-left: 5px solid #2ecc71;"><strong style="color: #27ae60; font-size: 18px;">✓ SU FUNCIÓN ES:</strong>
-       <ul class="bullet-list" style="margin: 15px 0 0 0;">
-        <li style="margin: 12px 0; padding-left: 35px;">Orientar al cliente sobre cómo usar dispositivos.</li>
-        <li style="margin: 12px 0; padding-left: 35px;">Acompañar en la navegación del sistema.</li>
-        <li style="margin: 12px 0; padding-left: 35px;">Guiar en el proceso técnico.</li>
-       </ul>
+
+    <!-- Slide 5: Servicios Disponibles -->
+    <div class="slide">
+      <div class="slide-title">¿Qué Servicios se Pueden Realizar?</div>
+      <div class="slide-content">
+        <p style="font-size: 18px; margin: 15px 0 25px 0; color: #2c3e50;">El módulo permite realizar las siguientes operaciones principales:</p>
+        
+        <ul class="bullet-list">
+          <li><strong>Alta de Expediente de Identificación:</strong> Para clientes nuevos o sin biométricos registrados.</li>
+          <li><strong>Solicitud de Retiros Parciales por Desempleo:</strong> Para clientes que cumplen con los requisitos legales.</li>
+          <li><strong>Consulta de Saldo y Movimientos:</strong> Visualización y envío de información al correo.</li>
+          <li><strong>Reimpresión de Estado de Cuenta:</strong> Solicitud de los últimos dos periodos cuatrimestrales.</li>
+        </ul>
       </div>
-      <div class="highlight-box" style="background: #ffe8e8; border-left: 5px solid #e74c3c; margin-top: 25px;"><strong style="color: #c0392b; font-size: 18px;">✗ SU FUNCIÓN NO ES:</strong>
-       <p style="margin: 10px 0 0 0; color: #555;">Realizar el trámite por el cliente. El sistema está diseñado para que el usuario sea <strong>totalmente autónomo.</strong></p>
+      <div class="slide-illustration svg-animation" style="margin-top: 40px;">
+        <svg width="600" height="140" viewBox="0 0 600 140" xmlns="http://www.w3.org/2000/svg">
+          <!-- Servicio 1: Expediente -->
+          <g class="float-animation" style="animation-delay: 0s">
+            <rect x="25" y="20" width="110" height="90" rx="6" fill="#e8f5e9" stroke="#d4a574" stroke-width="2.5"/>
+            <rect x="40" y="30" width="80" height="50" fill="#f0f8ff" rx="3"/>
+            <line x1="50" y1="40" x2="110" y2="40" stroke="#1a472a" stroke-width="1.5" opacity="0.5"/>
+            <line x1="50" y1="50" x2="110" y2="50" stroke="#1a472a" stroke-width="1.5" opacity="0.5"/>
+            <line x1="50" y1="60" x2="85" y2="60" stroke="#1a472a" stroke-width="1.5" opacity="0.5"/>
+            <text x="80" y="95" text-anchor="middle" font-size="12" font-weight="600" fill="#d4a574">Expediente</text>
+          </g>
+          
+          <!-- Servicio 2: Retiros -->
+          <g class="float-animation" style="animation-delay: 0.2s">
+            <rect x="155" y="20" width="110" height="90" rx="6" fill="#fff3e0" stroke="#d4a574" stroke-width="2.5"/>
+            <circle cx="180" cy="40" r="8" fill="#d4a574" opacity="0.7"/>
+            <rect x="175" y="50" width="40" height="8" rx="2" fill="#d4a574" opacity="0.8"/>
+            <rect x="175" y="62" width="30" height="8" rx="2" fill="#d4a574" opacity="0.6"/>
+            <rect x="175" y="74" width="20" height="8" rx="2" fill="#d4a574" opacity="0.4"/>
+            <text x="210" y="95" text-anchor="middle" font-size="12" font-weight="600" fill="#d4a574">Retiros</text>
+          </g>
+          
+          <!-- Servicio 3: Consultas -->
+          <g class="float-animation" style="animation-delay: 0.4s">
+            <rect x="285" y="20" width="110" height="90" rx="6" fill="#e8f5e9" stroke="#d4a574" stroke-width="2.5"/>
+            <circle cx="325" cy="45" r="8" fill="none" stroke="#d4a574" stroke-width="2"/>
+            <text x="325" y="50" text-anchor="middle" font-size="16" font-weight="700" fill="#d4a574">$</text>
+            <polyline points="310,65 320,55 330,65 340,50" fill="none" stroke="#d4a574" stroke-width="1.5"/>
+            <text x="340" y="95" text-anchor="middle" font-size="12" font-weight="600" fill="#d4a574">Consultas</text>
+          </g>
+          
+          <!-- Servicio 4: Estado de Cuenta -->
+          <g class="float-animation" style="animation-delay: 0.6s">
+            <rect x="415" y="20" width="110" height="90" rx="6" fill="#fff3e0" stroke="#d4a574" stroke-width="2.5"/>
+            <line x1="435" y1="30" x2="495" y2="30" stroke="#1a472a" stroke-width="2" opacity="0.6"/>
+            <line x1="435" y1="45" x2="495" y2="45" stroke="#1a472a" stroke-width="1.5" opacity="0.5"/>
+            <line x1="435" y1="58" x2="495" y2="58" stroke="#1a472a" stroke-width="1.5" opacity="0.5"/>
+            <line x1="435" y1="71" x2="480" y2="71" stroke="#1a472a" stroke-width="1.5" opacity="0.5"/>
+            <text x="470" y="95" text-anchor="middle" font-size="12" font-weight="600" fill="#d4a574">Estado Cuenta</text>
+          </g>
+        </svg>
       </div>
-      <div style="margin-top: 30px; padding: 20px; background: #f0f8ff; border-radius: 6px; border-left: 4px solid #d4a574;">
-       <p style="margin: 0; font-size: 15px; color: #2c3e50; line-height: 1.7;"><strong>💡 Recuerda:</strong> Tu rol es ser un <strong>facilitador técnico</strong>, no un ejecutor de operaciones. El cliente es el protagonista.</p>
-      </div>
-     </div>
-     <div class="slide-illustration svg-animation">
-      <svg width="240" height="320" viewbox="0 0 240 320" xmlns="http://www.w3.org/2000/svg"><!-- Asesor Digital (arriba) --> <circle cx="60" cy="50" r="18" fill="#d4a574" /> <rect x="47" y="70" width="26" height="35" rx="3" fill="#1a472a" /> <rect x="40" y="105" width="12" height="30" fill="#1a472a" /> <rect x="62" y="105" width="12" height="30" fill="#1a472a" /> <!-- Distintivo de "guía" --> <g class="float-animation">
-        <circle cx="100" cy="40" r="18" fill="none" stroke="#d4a574" stroke-width="2.5" />
-        <text x="100" y="48" text-anchor="middle" font-size="20" fill="#d4a574">
-         ?
-        </text>
-       </g> <!-- Cliente (abajo) --> <circle cx="180" cy="130" r="16" fill="#d4a574" /> <rect x="170" y="148" width="20" height="30" rx="2" fill="#e8f5e9" stroke="#d4a574" stroke-width="1.5" /> <rect x="165" y="178" width="9" height="25" fill="#e8f5e9" stroke="#d4a574" stroke-width="1" /> <rect x="181" y="178" width="9" height="25" fill="#e8f5e9" stroke="#d4a574" stroke-width="1" /> <!-- Módulo/Pantalla central --> <rect x="80" y="80" width="80" height="100" rx="6" fill="none" stroke="#d4a574" stroke-width="2.5" class="pulse-animation" /> <rect x="88" y="90" width="64" height="50" fill="#f0f8ff" rx="3" /> <line x1="95" y1="100" x2="145" y2="100" stroke="#1a472a" stroke-width="1" opacity="0.4" /> <line x1="95" y1="110" x2="145" y2="110" stroke="#1a472a" stroke-width="1" opacity="0.4" /> <line x1="95" y1="120" x2="125" y2="120" stroke="#1a472a" stroke-width="1" opacity="0.4" /> <!-- Botones de acción --> <rect x="92" y="150" width="28" height="20" rx="3" fill="#d4a574" opacity="0.7" /> <text x="106" y="163" text-anchor="middle" font-size="9" font-weight="600" fill="white">
-        OK
-       </text> <!-- Flechas de comunicación --> <path d="M 75 65 Q 80 75 90 85" fill="none" stroke="#2ecc71" stroke-width="2.5" marker-end="url(#arrow-green)" /> <path d="M 165 150 Q 155 160 145 175" fill="none" stroke="#d4a574" stroke-width="2.5" marker-end="url(#arrow-gold)" /> <!-- Zona de soporte --> <g class="float-animation" style="animation-delay: 0.3s">
-        <rect x="45" y="230" width="150" height="70" rx="6" fill="#e8f5e9" stroke="#d4a574" stroke-width="2" />
-        <text x="120" y="250" text-anchor="middle" font-size="12" font-weight="700" fill="#1a472a">
-         Rol de Asesor Digital
-        </text>
-        <text x="120" y="270" text-anchor="middle" font-size="10" font-weight="600" fill="#27ae60">
-         ✓ Orientación técnica
-        </text>
-        <text x="120" y="285" text-anchor="middle" font-size="10" font-weight="600" fill="#27ae60">
-         ✓ Acompañamiento
-        </text>
-        <text x="120" y="300" text-anchor="middle" font-size="10" font-weight="600" fill="#27ae60">
-         ✓ Cliente es autónomo
-        </text>
-       </g> <!-- Marcadores --> <defs>
-        <marker id="arrow-green" markerwidth="10" markerheight="10" refx="9" refy="3" orient="auto">
-         <polygon points="0 0, 10 3, 0 6" fill="#2ecc71" />
-        </marker>
-        <marker id="arrow-gold" markerwidth="10" markerheight="10" refx="9" refy="3" orient="auto">
-         <polygon points="0 0, 10 3, 0 6" fill="#d4a574" />
-        </marker>
-       </defs>
-      </svg>
-     </div>
     </div>
-   </div><!-- Controles -->
-   <div class="controls"><button id="prevBtn" onclick="changeSlide(-1)">← Anterior</button> <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">7</span></span> <button id="nextBtn" onclick="changeSlide(1)">Siguiente →</button>
-   </div>
+
+    <!-- Slide 6: Actualización de Expediente -->
+    <div class="slide">
+      <div class="slide-title">Actualización de Expediente y Datos</div>
+      <div class="two-column">
+        <div class="slide-content">
+          <p style="font-size: 17px; margin: 15px 0 20px 0; color: #2c3e50; font-weight: 600;">🔄 Actualización de Expediente</p>
+          <p style="font-size: 16px; margin: 0 0 20px 0; color: #555;">El sistema detecta automáticamente si los expedientes han vencido y permite iniciar la actualización inmediatamente.</p>
+
+          <p style="font-size: 17px; margin: 20px 0 15px 0; color: #2c3e50; font-weight: 600;">✏️ Modificación de Datos</p>
+          
+          <div class="grid-2">
+            <div class="grid-item">
+              <div class="grid-item-title">📧 Contacto</div>
+              <div class="grid-item-text">Correo y teléfono</div>
+            </div>
+            <div class="grid-item">
+              <div class="grid-item-title">🏛️ Fiscales</div>
+              <div class="grid-item-text">RFC</div>
+            </div>
+            <div class="grid-item">
+              <div class="grid-item-title">👥 Beneficiarios</div>
+              <div class="grid-item-text">Registrar/eliminar</div>
+            </div>
+            <div class="grid-item">
+              <div class="grid-item-title">📍 Domicilio</div>
+              <div class="grid-item-text">Dirección</div>
+            </div>
+          </div>
+
+          <div class="highlight-box" style="margin-top: 20px; font-size: 15px;">
+            <strong>⚙️ Validación:</strong> Cambios requieren confirmación vía SMS o email dentro de horas.
+          </div>
+        </div>
+        <div class="slide-illustration svg-animation">
+          <svg width="240" height="320" viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg">
+            <!-- Alerta de vencimiento -->
+            <g class="pulse-animation">
+              <rect x="30" y="20" width="180" height="50" rx="6" fill="#ffe8e8" stroke="#d4a574" stroke-width="2.5"/>
+              <text x="120" y="42" text-anchor="middle" font-size="13" font-weight="700" fill="#d4a574">⚠️ Expediente Vencido</text>
+              <text x="120" y="60" text-anchor="middle" font-size="11" fill="#555">Actualizar ahora</text>
+            </g>
+            
+            <!-- Centro: Base de datos -->
+            <circle cx="120" cy="120" r="28" fill="#e8f5e9" stroke="#d4a574" stroke-width="2.5" class="float-animation"/>
+            <text x="120" y="128" text-anchor="middle" font-size="22" fill="#d4a574">≡</text>
+            
+            <!-- Campos modificables extendiendo -->
+            <g class="float-animation" style="animation-delay: 0.15s">
+              <line x1="120" y1="148" x2="70" y2="190" stroke="#d4a574" stroke-width="1.5" opacity="0.4"/>
+              <rect x="35" y="185" width="70" height="30" rx="4" fill="#fff3e0" stroke="#d4a574" stroke-width="1.5"/>
+              <text x="70" y="205" text-anchor="middle" font-size="11" font-weight="600" fill="#d4a574">Contacto</text>
+            </g>
+            
+            <g class="float-animation" style="animation-delay: 0.3s">
+              <line x1="120" y1="148" x2="170" y2="190" stroke="#d4a574" stroke-width="1.5" opacity="0.4"/>
+              <rect x="135" y="185" width="70" height="30" rx="4" fill="#e8f5e9" stroke="#d4a574" stroke-width="1.5"/>
+              <text x="170" y="205" text-anchor="middle" font-size="11" font-weight="600" fill="#d4a574">Domicilio</text>
+            </g>
+            
+            <!-- Validación -->
+            <g class="float-animation" style="animation-delay: 0.45s">
+              <rect x="40" y="250" width="160" height="50" rx="6" fill="#e8f5e9" stroke="#d4a574" stroke-width="2.5"/>
+              <text x="120" y="270" text-anchor="middle" font-size="12" font-weight="600" fill="#d4a574">Validación SMS/Email</text>
+              <text x="120" y="288" text-anchor="middle" font-size="10" fill="#666">Confirmar en pocas horas</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7: Función del Asesor Digital -->
+    <div class="slide">
+      <div class="slide-title">Función del Asesor Digital</div>
+      <div class="two-column">
+        <div class="slide-content">
+          <div class="highlight-box" style="background: #e8f5e9; border-left: 5px solid #2ecc71;">
+            <strong style="color: #27ae60; font-size: 18px;">✓ SU FUNCIÓN ES:</strong>
+            <ul class="bullet-list" style="margin: 15px 0 0 0;">
+              <li style="margin: 12px 0; padding-left: 35px;">Orientar al cliente sobre cómo usar dispositivos.</li>
+              <li style="margin: 12px 0; padding-left: 35px;">Acompañar en la navegación del sistema.</li>
+              <li style="margin: 12px 0; padding-left: 35px;">Guiar en el proceso técnico.</li>
+            </ul>
+          </div>
+
+          <div class="highlight-box" style="background: #ffe8e8; border-left: 5px solid #e74c3c; margin-top: 25px;">
+            <strong style="color: #c0392b; font-size: 18px;">✗ SU FUNCIÓN NO ES:</strong>
+            <p style="margin: 10px 0 0 0; color: #555;">Realizar el trámite por el cliente. El sistema está diseñado para que el usuario sea <strong>totalmente autónomo.</strong></p>
+          </div>
+
+          <div style="margin-top: 30px; padding: 20px; background: #f0f8ff; border-radius: 6px; border-left: 4px solid #d4a574;">
+            <p style="margin: 0; font-size: 15px; color: #2c3e50; line-height: 1.7;"><strong>💡 Recuerda:</strong> Tu rol es ser un <strong>facilitador técnico</strong>, no un ejecutor de operaciones. El cliente es el protagonista.</p>
+          </div>
+        </div>
+        <div class="slide-illustration svg-animation">
+          <svg width="240" height="320" viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg">
+            <!-- Asesor Digital (arriba) -->
+            <circle cx="60" cy="50" r="18" fill="#d4a574"/>
+            <rect x="47" y="70" width="26" height="35" rx="3" fill="#1a472a"/>
+            <rect x="40" y="105" width="12" height="30" fill="#1a472a"/>
+            <rect x="62" y="105" width="12" height="30" fill="#1a472a"/>
+            
+            <!-- Distintivo de "guía" -->
+            <g class="float-animation">
+              <circle cx="100" cy="40" r="18" fill="none" stroke="#d4a574" stroke-width="2.5"/>
+              <text x="100" y="48" text-anchor="middle" font-size="20" fill="#d4a574">?</text>
+            </g>
+            
+            <!-- Cliente (abajo) -->
+            <circle cx="180" cy="130" r="16" fill="#d4a574"/>
+            <rect x="170" y="148" width="20" height="30" rx="2" fill="#e8f5e9" stroke="#d4a574" stroke-width="1.5"/>
+            <rect x="165" y="178" width="9" height="25" fill="#e8f5e9" stroke="#d4a574" stroke-width="1"/>
+            <rect x="181" y="178" width="9" height="25" fill="#e8f5e9" stroke="#d4a574" stroke-width="1"/>
+            
+            <!-- Módulo/Pantalla central -->
+            <rect x="80" y="80" width="80" height="100" rx="6" fill="none" stroke="#d4a574" stroke-width="2.5" class="pulse-animation"/>
+            <rect x="88" y="90" width="64" height="50" fill="#f0f8ff" rx="3"/>
+            <line x1="95" y1="100" x2="145" y2="100" stroke="#1a472a" stroke-width="1" opacity="0.4"/>
+            <line x1="95" y1="110" x2="145" y2="110" stroke="#1a472a" stroke-width="1" opacity="0.4"/>
+            <line x1="95" y1="120" x2="125" y2="120" stroke="#1a472a" stroke-width="1" opacity="0.4"/>
+            
+            <!-- Botones de acción -->
+            <rect x="92" y="150" width="28" height="20" rx="3" fill="#d4a574" opacity="0.7"/>
+            <text x="106" y="163" text-anchor="middle" font-size="9" font-weight="600" fill="white">OK</text>
+            
+            <!-- Flechas de comunicación -->
+            <path d="M 75 65 Q 80 75 90 85" fill="none" stroke="#2ecc71" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+            <path d="M 165 150 Q 155 160 145 175" fill="none" stroke="#d4a574" stroke-width="2.5" marker-end="url(#arrow-gold)"/>
+            
+            <!-- Zona de soporte -->
+            <g class="float-animation" style="animation-delay: 0.3s">
+              <rect x="45" y="230" width="150" height="70" rx="6" fill="#e8f5e9" stroke="#d4a574" stroke-width="2"/>
+              <text x="120" y="250" text-anchor="middle" font-size="12" font-weight="700" fill="#1a472a">Rol de Asesor Digital</text>
+              
+              <text x="120" y="270" text-anchor="middle" font-size="10" font-weight="600" fill="#27ae60">✓ Orientación técnica</text>
+              <text x="120" y="285" text-anchor="middle" font-size="10" font-weight="600" fill="#27ae60">✓ Acompañamiento</text>
+              <text x="120" y="300" text-anchor="middle" font-size="10" font-weight="600" fill="#27ae60">✓ Cliente es autónomo</text>
+            </g>
+            
+            <!-- Marcadores -->
+            <defs>
+              <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <polygon points="0 0, 10 3, 0 6" fill="#2ecc71"/>
+              </marker>
+              <marker id="arrow-gold" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <polygon points="0 0, 10 3, 0 6" fill="#d4a574"/>
+              </marker>
+            </defs>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controles -->
+    <div class="controls">
+      <button id="prevBtn" onclick="changeSlide(-1)">← Anterior</button>
+      <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">7</span></span>
+      <button id="nextBtn" onclick="changeSlide(1)">Siguiente →</button>
+    </div>
   </div>
+
   <script>
     let currentSlide = 1;
     const totalSlides = document.querySelectorAll('.slide').length;
     document.getElementById('totalSlides').textContent = totalSlides;
+
+    function toggleFullscreen() {
+      const container = document.querySelector('.presentation-container');
+      
+      if (!document.fullscreenElement) {
+        if (container.requestFullscreen) {
+          container.requestFullscreen().catch(err => {
+            console.error('Error al entrar en pantalla completa:', err);
+          });
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
 
     function showSlide(n) {
       const slides = document.querySelectorAll('.slide');
@@ -722,5 +843,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c9bdf9836f125bf',t:'MTc3MDM5Mzc2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
